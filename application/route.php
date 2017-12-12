@@ -11,5 +11,12 @@
 
 use think\Route;
 
-// 根本版本号访问不同版本的api
-Route::get('api/:version/index', 'api/:version.Index/index');
+// token
+Route::post('api/:version/token/verify', 'api/:version.Token/verifyToken');
+Route::post('api/:version/token/cms','api/:version.Token/getCmsToken');
+Route::post('api/:version/token/cms_logout','api/:version.Token/deleteCmsToken');
+
+// category
+Route::get('api/:version/category/all', 'api/:version.Category/getAllCategories');
+
+Route::get('cms/token/login','cms/Token/getToken');
