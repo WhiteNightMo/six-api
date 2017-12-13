@@ -36,6 +36,21 @@ class BaseValidate extends Validate
     }
 
     /**
+     * 验证id是否是正整数
+     *
+     * @param $value
+     * @return bool
+     */
+    protected function isPositiveInteger($value)
+    {
+        if (is_numeric($value) && is_int($value + 0) && ($value + 0) > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * 参数不能为空
      *
      * @param $value
@@ -45,6 +60,20 @@ class BaseValidate extends Validate
     {
         if (empty($value)) {
             return false;
+        }
+        return true;
+    }
+
+    /**
+     * 检查密码是否合法
+     *
+     * @param $se
+     * @return bool|string
+     */
+    protected function checkSecretValid($se)
+    {
+        if (!preg_match('/^[A-Za-z0-9]{6,16}$/', $se)) {
+            return '新密码不符合规范，密码由6-16位数字和大小写字母组成';
         }
         return true;
     }

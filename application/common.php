@@ -11,6 +11,22 @@
 
 // 应用公共文件
 /**
+ * 密码加密
+ *
+ * @param $pwd
+ * @return string
+ */
+function pwd_encrypt($pwd)
+{
+    if (empty($pwd)) {
+        $pwd = config('secure.default_pwd');
+    }
+    $hash = $pwd . config('secure.pwd_salt');
+    $chars = md5(hash('sha256', $hash));
+    return $chars;
+}
+
+/**
  * 获取指定长度的随机字符串
  *
  * @param $length

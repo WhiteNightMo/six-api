@@ -20,7 +20,7 @@ class User extends BaseModel
     public static function check($ac, $se)
     {
         $user = self::where('user', '=', $ac)
-            ->where('pwd', '=', self::pwdEncrypt($se))
+            ->where('pwd', '=', pwd_encrypt($se))
             ->find();
         return $user;
     }

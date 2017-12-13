@@ -48,6 +48,50 @@ class CmsToken extends Token
     }
 
     /**
+     * 修改密码
+     *
+     * @param $uid
+     * @param $se
+     * @param $newSe
+     * @throws TokenException
+     */
+    public function updateSecret($uid, $se, $newSe)
+    {
+        $user = $this->_updateSecret($uid, $se, $newSe);
+        if (!$user) {
+            throw new TokenException([
+                'msg' => '原密码错误或与新密码相同',
+                'errorCode' => 10004
+            ]);
+        }
+    }
+
+    /**
+     * 更新密码
+     *
+     * @param $uid
+     * @param $se
+     * @param $newSe
+     * @return User|false|int
+     */
+    private function _updateSecret($uid, $se, $newSe)
+    {
+        // 加密
+        $se = pwd_encrypt($se);
+        $newSe = pwd_encrypt($newSe);
+        // 更新
+        $user = new User();
+        // 原密码正确，且不能和新密码相同
+        $user->save(['pwd' => $newSe], function ($query) use ($uid, $se, $newSe) {
+            // 更新status值为1 并且id大于10的数据
+            $query->where('id', '=', $uid)
+                ->where('pwd', '=', $se)
+                ->where('pwd', '<>', $newSe);
+        });
+        return $user;
+    }
+
+    /**
      * 删除cms token
      *
      * @param $token

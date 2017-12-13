@@ -13,10 +13,13 @@ use think\Route;
 
 // token
 Route::post('api/:version/token/verify', 'api/:version.Token/verifyToken');
-Route::post('api/:version/token/cms','api/:version.Token/getCmsToken');
-Route::post('api/:version/token/cms_logout','api/:version.Token/deleteCmsToken');
+// cms
+Route::post('api/:version/cms','api/:version.CmsToken/getCmsToken');
+Route::put('api/:version/cms/secret','api/:version.CmsToken/updateSecret');
+Route::post('api/:version/cms/logout','api/:version.CmsToken/deleteCmsToken');
+
+// user
+Route::get('api/:version/user_login/paginate', 'api/:version.UserLogin/getLoginLogs');
 
 // category
 Route::get('api/:version/category/all', 'api/:version.Category/getAllCategories');
-
-Route::get('cms/token/login','cms/Token/getToken');

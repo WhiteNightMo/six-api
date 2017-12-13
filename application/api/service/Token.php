@@ -8,6 +8,8 @@
 namespace app\api\service;
 
 
+use app\lib\enum\ScopeEnum;
+use app\lib\exception\ForbiddenException;
 use app\lib\exception\TokenException;
 use think\Cache;
 use think\Exception;
@@ -44,7 +46,7 @@ class Token
         // 规定token放在header头中
         $token = Request::instance()->header('token');
         // 从缓存中取出token的值
-        $vars = cache($token);
+        $vars = Cache::get($token);
         if (!$vars) {
             throw new TokenException();
         } else {
@@ -81,5 +83,28 @@ class Token
     public static function verifyToken($token)
     {
         return Cache::has($token);
+    }
+
+    /**
+     * 检查访问需要的权限
+     *
+     * @param int $scopeEnum
+     * @return bool
+     * @throws ForbiddenException
+     * @throws TokenException
+     */
+    public static function needScopeEnum($scopeEnum = ScopeEnum::SUPER)
+    {
+        // token不存在GG
+        $scope = self::getCurrentTokenVar('scope');
+        if ($scope) {
+            if ($scope == $scopeEnum) {
+                return true;
+            } else {
+                throw new ForbiddenException();
+            }
+        } else {
+            throw new TokenException();
+        }
     }
 }
