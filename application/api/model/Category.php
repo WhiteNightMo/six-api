@@ -8,8 +8,13 @@
 namespace app\api\model;
 
 
+use traits\model\SoftDelete;
+
 class Category extends BaseModel
 {
+    use SoftDelete;
+    protected $deleteTime = 'delete_time';
+    protected $autoWriteTimestamp = true;
     protected $hidden = ['create_time', 'update_time', 'delete_time'];
 
     public function links()
@@ -25,5 +30,21 @@ class Category extends BaseModel
     public static function getAllCategoriesWithLinks()
     {
         return self::with(['links'])->select();
+    }
+
+    /**
+     * 检查category_id是否合法
+     *
+     * @param $id
+     * @return bool
+     */
+    public static function isValidCategoryID($id)
+    {
+        $category = self::find($id);
+        if ($category) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

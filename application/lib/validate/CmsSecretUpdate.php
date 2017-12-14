@@ -1,6 +1,6 @@
 <?php
 /**
- * CmsSecretUpdate（cms更新密码）
+ * cms更新密码
  *
  * @author xiaomo<i@nixiaomo.com>
  */

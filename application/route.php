@@ -23,3 +23,9 @@ Route::get('api/:version/user_login/paginate', 'api/:version.UserLogin/getLoginL
 
 // category
 Route::get('api/:version/category/all', 'api/:version.Category/getAllCategories');
+Route::post('api/:version/category', 'api/:version.Category/createOrUpdateCategory');
+Route::delete('api/:version/category/:id', 'api/:version.Category/delete');
+
+// link
+Route::post('api/:version/link', 'api/:version.Link/createOrUpdateLink');
+Route::delete('api/:version/link/:id', 'api/:version.Link/delete');

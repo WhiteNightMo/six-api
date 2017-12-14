@@ -10,6 +10,8 @@ namespace app\api\model;
 
 class User extends BaseModel
 {
+    protected $autoWriteTimestamp = true;
+
     /**
      * 检查用户名密码
      *

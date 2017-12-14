@@ -51,6 +51,20 @@ class BaseValidate extends Validate
     }
 
     /**
+     * 验证id是否存在
+     *
+     * @param $value
+     * @return bool
+     */
+    protected function isNotSet($value)
+    {
+        if (!isset($value)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * 参数不能为空
      *
      * @param $value
@@ -76,5 +90,36 @@ class BaseValidate extends Validate
             return '新密码不符合规范，密码由6-16位数字和大小写字母组成';
         }
         return true;
+    }
+
+    /**
+     * 检查url是否合法
+     *
+     * @param $url
+     * @return bool|string
+     */
+    protected function checkUrlValid($url)
+    {
+        if (!preg_match('/(https?:\/\/)?[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+\.?/', $url)) {
+            return 'url不符合规范';
+        }
+        return true;
+    }
+
+    /**
+     * 根据rule获取数据
+     *
+     * @param $arrays
+     * @return array
+     * @throws ParameterException
+     */
+    public function getDataByRule($arrays)
+    {
+        // 巧妙应用各验证器的$rule数组，只保存要验证的数据
+        $newArray = [];
+        foreach ($this->rule as $key => $value) {
+            $newArray[$key] = $arrays[$key];
+        }
+        return $newArray;
     }
 }
