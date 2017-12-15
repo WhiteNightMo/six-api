@@ -112,7 +112,7 @@ class CmsToken extends Token
     {
         $key = self::generateToken();
         $value = json_encode($values);
-        $expire_in = config('setting.token_expire_in');
+        $expire_in = config('secure.token_expire_in');
         // 存储
         $request = cache($key, $value, $expire_in);
         if (!$request) {

@@ -21,4 +21,29 @@ class BaseController extends Controller
     {
         Token::needScopeEnum(ScopeEnum::SUPER);
     }
+
+    /**
+     * 获取分页数据
+     *
+     * @param $paging \think\Paginator
+     * @return array
+     */
+    public function getPaginatorData($paging)
+    {
+        if ($paging->isEmpty()) {
+            return [
+                'data' => [],
+                'current_page' => $paging->currentPage()
+            ];
+        }
+
+        // 返回数据
+        $data = $paging->toArray();
+        return [
+            'data' => $data,
+            'current_page' => $paging->currentPage(),
+            'page_html' => $paging->render()
+        ];
+
+    }
 }

@@ -29,19 +29,6 @@ class UserLogin extends BaseController
 
         // 分页获取登录日志
         $pagingLogs = UserLoginModel::getLoginLogs($page, $size);
-        if ($pagingLogs->isEmpty()) {
-            return [
-                'data' => [],
-                'current_page' => $pagingLogs->currentPage()
-            ];
-        }
-
-        // 返回数据
-        $data = $pagingLogs->toArray();
-        return [
-            'data' => $data,
-            'current_page' => $pagingLogs->currentPage(),
-            'page_html' => $pagingLogs->render()
-        ];
+        return $this->getPaginatorData($pagingLogs);
     }
 }
