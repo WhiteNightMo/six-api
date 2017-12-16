@@ -21,6 +21,13 @@ class Article extends BaseModel
         'create_time,update_time' => 'timestamp'
     ];
 
+    // 解码
+    public function getBodyAttr($value)
+    {
+        return htmlspecialchars_decode($value);
+    }
+
+    // 多对多关联
     public function tags()
     {
         return $this->belongsToMany('Tag');

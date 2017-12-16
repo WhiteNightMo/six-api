@@ -16,6 +16,9 @@ use app\lib\validate\EditorCreateOrUpdate;
 use app\lib\validate\IDMustBePositiveInt;
 use app\lib\validate\PageParameter;
 use think\Db;
+use think\Loader;
+
+Loader::import('parsedown.Parsedown', EXTEND_PATH);
 
 class Article extends BaseController
 {

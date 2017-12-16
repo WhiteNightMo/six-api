@@ -1,6 +1,6 @@
 <?php
 /**
- * EditorCreateOrUpdate（富文本编辑器创建或更新时验证）
+ * EditorCreateOrUpdate（Markdown/富文本编辑器创建或更新时验证）
  *
  * @author xiaomo<i@nixiaomo.com>
  */
@@ -13,7 +13,8 @@ class EditorCreateOrUpdate extends BaseValidate
     protected $rule = [
         'title' => 'require|isNotEmpty',
         'tags' => 'isNotSet',
-        'body' => 'require|editorIsNotEmpty'
+        'body' => 'require|isNotEmpty'
+//        'body' => 'require|editorIsNotEmpty'  、
     ];
 
     protected $message = [
@@ -23,7 +24,7 @@ class EditorCreateOrUpdate extends BaseValidate
     ];
 
     /**
-     * 编辑器内容不能为空
+     * 富文本编辑器内容不能为空
      *
      * @param $value
      * @return bool|string
