@@ -33,6 +33,7 @@ class Article extends BaseController
      * @param int $page
      * @param int $size
      * @return array
+     * @throws \think\Exception
      */
     public function getAllArticles($page = 1, $size = 15)
     {
@@ -88,7 +89,7 @@ class Article extends BaseController
      *
      * @param $id
      * @return \think\response\Json
-     * @throws ArticleException
+     * @throws \think\Exception
      */
     public function getArticleByID($id)
     {
@@ -106,6 +107,7 @@ class Article extends BaseController
      *
      * @param $id
      * @return \think\response\Json
+     * @throws \think\Exception
      */
     public function delete($id)
     {

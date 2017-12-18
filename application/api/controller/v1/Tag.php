@@ -16,6 +16,7 @@ class Tag extends BaseController
      *
      * @param $q
      * @return \think\response\Json
+     * @throws \think\Exception
      */
     public function getTagByParam($q)
     {

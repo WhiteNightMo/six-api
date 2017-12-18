@@ -20,7 +20,7 @@ class CmsToken extends Token
      * @param $ac
      * @param $se
      * @return mixed
-     * @throws TokenException
+     * @throws \think\Exception
      */
     public function get($ac, $se)
     {

@@ -23,6 +23,7 @@ class CmsToken extends Token
      * @param $ac
      * @param $se
      * @return array
+     * @throws \think\Exception
      */
     public function getCmsToken($ac, $se)
     {
@@ -42,6 +43,7 @@ class CmsToken extends Token
      * @param $newSe
      * @param $confirmSe
      * @return \think\response\Json
+     * @throws \think\Exception
      */
     public function updateSecret($se, $newSe, $confirmSe)
     {

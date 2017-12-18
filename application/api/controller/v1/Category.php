@@ -24,6 +24,7 @@ class Category extends BaseController
      * 获取所有分类和友链
      *
      * @return \think\response\Json
+     * @throws \think\Exception
      */
     public function getAllCategories()
     {
@@ -35,6 +36,7 @@ class Category extends BaseController
      * 新增或者更新category
      *
      * @return \think\response\Json
+     * @throws \think\Exception
      */
     public function createOrUpdateCategory()
     {
@@ -56,7 +58,7 @@ class Category extends BaseController
      *
      * @param $id
      * @return \think\response\Json
-     * @throws CategoryException
+     * @throws \think\Exception
      */
     public function delete($id)
     {

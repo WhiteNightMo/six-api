@@ -111,7 +111,6 @@ class BaseValidate extends Validate
      *
      * @param $arrays
      * @return array
-     * @throws ParameterException
      */
     public function getDataByRule($arrays)
     {

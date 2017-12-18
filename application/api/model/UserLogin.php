@@ -21,6 +21,7 @@ class UserLogin extends BaseModel
      * @param int $page
      * @param int $size
      * @return \think\Paginator
+     * @throws \think\Exception
      */
     public static function getLoginLogs($page = 1, $size = 15)
     {

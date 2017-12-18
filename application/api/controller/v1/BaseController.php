@@ -16,6 +16,8 @@ class BaseController extends Controller
 {
     /**
      * 检查CMS管理员权限
+     *
+     * @throws \think\Exception
      */
     public function checkSuperScope()
     {

@@ -24,7 +24,7 @@ class Link extends BaseController
      * 新增或者更新link
      *
      * @return \think\response\Json
-     * @throws CategoryException
+     * @throws \think\Exception
      */
     public function createOrUpdateLink()
     {
@@ -52,7 +52,7 @@ class Link extends BaseController
      *
      * @param $id
      * @return \think\response\Json
-     * @throws CategoryException
+     * @throws \think\Exception
      */
     public function delete($id)
     {

@@ -39,6 +39,7 @@ class Article extends BaseModel
      * @param int $page
      * @param int $size
      * @return \think\Paginator
+     * @throws \think\Exception
      */
     public static function getAllArticles($page = 1, $size = 15)
     {
@@ -52,6 +53,7 @@ class Article extends BaseModel
      *
      * @param $id
      * @return array|false|\PDOStatement|string|\think\Model
+     * @throws \think\Exception
      */
     public static function getArticleByID($id)
     {

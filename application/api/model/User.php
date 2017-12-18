@@ -18,6 +18,7 @@ class User extends BaseModel
      * @param $ac
      * @param $se
      * @return array|false|\PDOStatement|string|\think\Model
+     * @throws \think\Exception
      */
     public static function check($ac, $se)
     {

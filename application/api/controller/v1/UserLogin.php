@@ -22,6 +22,7 @@ class UserLogin extends BaseController
      * @param int $page
      * @param int $size
      * @return array
+     * @throws \think\Exception
      */
     public function getLoginLogs($page = 1, $size = 15)
     {

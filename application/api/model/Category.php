@@ -26,6 +26,7 @@ class Category extends BaseModel
      * 获取所有分类以及其下的友链
      *
      * @return false|\PDOStatement|string|\think\Collection
+     * @throws \think\Exception
      */
     public static function getAllCategoriesWithLinks()
     {
@@ -37,6 +38,7 @@ class Category extends BaseModel
      *
      * @param $id
      * @return bool
+     * @throws \think\Exception
      */
     public static function isValidCategoryID($id)
     {

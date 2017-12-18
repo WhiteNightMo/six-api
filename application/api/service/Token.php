@@ -67,6 +67,7 @@ class Token
      * 获取当前的uid
      *
      * @return mixed
+     * @throws \think\Exception
      */
     public static function getCurrentUID()
     {
@@ -90,8 +91,7 @@ class Token
      *
      * @param int $scopeEnum
      * @return bool
-     * @throws ForbiddenException
-     * @throws TokenException
+     * @throws \think\Exception
      */
     public static function needScopeEnum($scopeEnum = ScopeEnum::SUPER)
     {
