@@ -10,6 +10,7 @@ namespace app\api\controller\v1;
 
 use app\api\model\Article as ArticleModel;
 use app\api\model\Tag;
+use app\lib\exception\ArticleException;
 use app\lib\exception\ParameterException;
 use app\lib\exception\SuccessMessage;
 use app\lib\validate\EditorCreateOrUpdate;
@@ -50,11 +51,11 @@ class Article extends BaseController
      * @return \think\response\Json
      * @throws ParameterException
      */
-    public function createOrUpdateArticle($id)
+    public function createOrUpdateArticle($id = null)
     {
-        if (!is_numeric($id) || !is_int($id + 0)) {
+        if (empty($id) || !is_numeric($id) || !is_int($id + 0)) {
             throw new ParameterException([
-                'id有误'
+                'msg' => 'id有误'
             ]);
         }
         $validate = new EditorCreateOrUpdate();
@@ -69,10 +70,12 @@ class Article extends BaseController
         $data['id'] = $id;
         $isUpdate = $id != 0 ? true : false;
         $category = new ArticleModel();
-        $category->isUpdate($isUpdate)->save($data);
+        $res = $category->isUpdate($isUpdate)->save($data);
 
-        // sync方法：只有数组中的tag_id会存在中间表中
-        $category->tags()->sync($tags);
+        if ($res) {
+            // sync方法：只有数组中的tag_id会存在中间表中
+            $category->tags()->sync($tags);
+        }
 
         return json([
             'id' => $category->id,
@@ -85,12 +88,16 @@ class Article extends BaseController
      *
      * @param $id
      * @return \think\response\Json
+     * @throws ArticleException
      */
     public function getArticleByID($id)
     {
         (new IDMustBePositiveInt())->goCheck();
 
         $article = ArticleModel::getArticleByID($id);
+        if (!$article) {
+            throw new ArticleException();
+        }
         return json($article);
     }
 

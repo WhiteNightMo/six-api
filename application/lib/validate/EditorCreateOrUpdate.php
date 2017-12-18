@@ -12,14 +12,14 @@ class EditorCreateOrUpdate extends BaseValidate
 {
     protected $rule = [
         'title' => 'require|isNotEmpty',
-        'tags' => 'isNotSet',
+        'tags' => 'require|checkTagsLength',
         'body' => 'require|isNotEmpty'
 //        'body' => 'require|editorIsNotEmpty'  、
     ];
 
     protected $message = [
         'title' => '标题不能为空',
-        'tags' => '标签不能省略',
+        'tags' => '标签最多三个，最少一个',
         'body' => '内容不能为空'
     ];
 
@@ -38,5 +38,19 @@ class EditorCreateOrUpdate extends BaseValidate
         } else {
             return true;
         }
+    }
+
+    /**
+     * 检查标签数量
+     *
+     * @param $tags
+     * @return bool
+     */
+    protected function checkTagsLength($tags)
+    {
+        if (count($tags) > 3) {
+            return false;
+        }
+        return true;
     }
 }
