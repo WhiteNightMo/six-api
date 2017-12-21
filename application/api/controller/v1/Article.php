@@ -54,7 +54,7 @@ class Article extends BaseController
      */
     public function createOrUpdateArticle($id = null)
     {
-        if (empty($id) || !is_numeric($id) || !is_int($id + 0)) {
+        if (is_null($id) || !is_numeric($id) || !is_int($id + 0)) {
             throw new ParameterException([
                 'msg' => 'id有误'
             ]);
@@ -68,18 +68,18 @@ class Article extends BaseController
         unset($data['tags']);
 
         // 显式指定新增/更新
-        $data['id'] = $id;
+        $id != 0 && $data['id'] = $id;
         $isUpdate = $id != 0 ? true : false;
-        $category = new ArticleModel();
-        $res = $category->isUpdate($isUpdate)->save($data);
+        $article = new ArticleModel();
+        $res = $article->isUpdate($isUpdate)->save($data);
 
         if ($res) {
             // sync方法：只有数组中的tag_id会存在中间表中
-            $category->tags()->sync($tags);
+            $article->tags()->sync($tags);
         }
 
         return json([
-            'id' => $category->id,
+            'id' => $article->id,
             'errorCode' => 0
         ], 201);
     }
