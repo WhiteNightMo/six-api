@@ -33,4 +33,15 @@ class BaseModel extends Model
             ]);
         }
     }
+
+    /**
+     * 默认全局过滤方法 解码
+     *
+     * @param $value
+     * @return string
+     */
+    public static function defaultFilterDecode($value)
+    {
+        return htmlspecialchars_decode($value);
+    }
 }

@@ -10,6 +10,8 @@ namespace app\api\model;
 
 use traits\model\SoftDelete;
 
+//Loader::import('parsedown.Parsedown', EXTEND_PATH);
+
 class Article extends BaseModel
 {
     use SoftDelete;
@@ -24,7 +26,12 @@ class Article extends BaseModel
     // 解码
     public function getBodyAttr($value)
     {
-        return htmlspecialchars_decode($value);
+        $value = self::defaultFilterDecode($value);
+        //  Parsedown会对代码区域内的html代码进行转义，代码区域外的却不进行转义
+//        $Parsedown = new \Parsedown();
+        // 转义下面这句话时，会执行script语句
+//        $value = $Parsedown->text("<script>alert(1);</script>\n```\n<script>alert(1);</script>\n```";);
+        return $value;
     }
 
     // 多对多关联

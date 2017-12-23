@@ -17,9 +17,6 @@ use app\lib\validate\EditorCreateOrUpdate;
 use app\lib\validate\IDMustBePositiveInt;
 use app\lib\validate\PageParameter;
 use think\Db;
-use think\Loader;
-
-Loader::import('parsedown.Parsedown', EXTEND_PATH);
 
 class Article extends BaseController
 {
@@ -62,6 +59,7 @@ class Article extends BaseController
         $validate = new EditorCreateOrUpdate();
         $validate->goCheck();
         $data = $validate->getDataByRule(input('post.'));
+//        $data['body'] = input('post.body/s', '', null);
 
         // 整理标签数组
         $tags = Tag::normalizeTags($data['tags']);
@@ -88,16 +86,23 @@ class Article extends BaseController
      * 根据id获取文章
      *
      * @param $id
+     * @param $isEdit
      * @return \think\response\Json
      * @throws \think\Exception
      */
-    public function getArticleByID($id)
+    public function getArticleByID($id, $isEdit = null)
     {
         (new IDMustBePositiveInt())->goCheck();
 
         $article = ArticleModel::getArticleByID($id);
         if (!$article) {
             throw new ArticleException();
+        }
+        // 如果是编辑，则不使用获取器解析后的内容
+        if ($isEdit && $isEdit == true) {
+            $array = $article->toArray();
+            $array['body'] = ArticleModel::defaultFilterDecode($article->getData('body'));
+            return json($array);
         }
         return json($article);
     }
