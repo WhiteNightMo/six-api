@@ -111,12 +111,19 @@ class BaseValidate extends Validate
      *
      * @param $arrays
      * @return array
+     * @throws ParameterException
      */
     public function getDataByRule($arrays)
     {
         // 巧妙应用各验证器的$rule数组，只保存要验证的数据
         $newArray = [];
         foreach ($this->rule as $key => $value) {
+            // key不存在
+            if (!isset($arrays[$key])) {
+                throw new ParameterException([
+                    'msg' => $this->message[$key]
+                ]);
+            }
             $newArray[$key] = $arrays[$key];
         }
         return $newArray;
