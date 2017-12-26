@@ -65,10 +65,6 @@ function get_login_ip()
     // 本地部署为127.0.0.1
     $request = \think\Request::instance();
     $ip = $request->ip();
-    // TODO 上线后需要删除
-    if ($ip == '127.0.0.1') {
-        $ip = '123.125.71.38';  // 北京市
-    }
     return $ip;
 }
 

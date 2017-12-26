@@ -6,7 +6,7 @@
  */
 
 // host
-const HOST = 'http://six.me';
+const HOST = 'http://api.biubiubiu.moe';
 
 return [
     // 项目名称

@@ -11,33 +11,34 @@
 
 use think\Route;
 
+
 // token
-Route::post('api/:version/token/verify', 'api/:version.Token/verifyToken');
+Route::post('/:version/token/verify', 'api/:version.Token/verifyToken');
 // cms
-Route::post('api/:version/cms', 'api/:version.CmsToken/getCmsToken');
-Route::put('api/:version/cms/secret', 'api/:version.CmsToken/updateSecret');
-Route::post('api/:version/cms/logout', 'api/:version.CmsToken/deleteCmsToken');
+Route::post('/:version/cms', 'api/:version.CmsToken/getCmsToken');
+Route::put('/:version/cms/secret', 'api/:version.CmsToken/updateSecret');
+Route::post('/:version/cms/logout', 'api/:version.CmsToken/deleteCmsToken');
 
 // upload
-Route::post('api/:version/upload_image', 'api/:version.Upload/uploadImage');
+Route::post('/:version/upload_image', 'api/:version.Upload/uploadImage');
 
 // user
-Route::get('api/:version/user_login/paginate', 'api/:version.UserLogin/getLoginLogs');
+Route::get('/:version/user_login/paginate', 'api/:version.UserLogin/getLoginLogs');
 
 // article
-Route::get('api/:version/article', 'api/:version.Article/getAllArticles');
-Route::get('api/:version/article/:id', 'api/:version.Article/getArticleByID');
-Route::post('api/:version/article', 'api/:version.Article/createOrUpdateArticle');
-Route::delete('api/:version/article/:id', 'api/:version.Article/delete');
+Route::get('/:version/article', 'api/:version.Article/getAllArticles');
+Route::get('/:version/article/:id', 'api/:version.Article/getArticleByID');
+Route::post('/:version/article', 'api/:version.Article/createOrUpdateArticle');
+Route::delete('/:version/article/:id', 'api/:version.Article/delete');
 
 // tag
-Route::get('api/:version/tag/q', 'api/:version.Tag/getTagByParam');
+Route::get('/:version/tag/q', 'api/:version.Tag/getTagByParam');
 
 // category
-Route::get('api/:version/category/all', 'api/:version.Category/getAllCategories');
-Route::post('api/:version/category', 'api/:version.Category/createOrUpdateCategory');
-Route::delete('api/:version/category/:id', 'api/:version.Category/delete');
+Route::get('/:version/category/all', 'api/:version.Category/getAllCategories');
+Route::post('/:version/category', 'api/:version.Category/createOrUpdateCategory');
+Route::delete('/:version/category/:id', 'api/:version.Category/delete');
 
 // link
-Route::post('api/:version/link', 'api/:version.Link/createOrUpdateLink');
-Route::delete('api/:version/link/:id', 'api/:version.Link/delete');
+Route::post('/:version/link', 'api/:version.Link/createOrUpdateLink');
+Route::delete('/:version/link/:id', 'api/:version.Link/delete');
