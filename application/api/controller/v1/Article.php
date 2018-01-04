@@ -75,6 +75,12 @@ class Article extends BaseController
         if ($articles->isEmpty()) {
             throw new ArticleException();
         }
+        // 整理格式
+        $articles = $articles->visible(['id', 'title', 'update_time'])->toArray();
+        $articles = collection($articles)->each(function ($article) {
+            $article['update_time'] = date('d', strtotime($article['update_time']));
+            return $article;
+        });
         return json($articles);
     }
 

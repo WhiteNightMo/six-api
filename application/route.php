@@ -31,7 +31,7 @@ Route::get('/:version/article/:id', 'api/:version.Article/getArticleByID', [], [
 Route::post('/:version/article', 'api/:version.Article/createOrUpdateArticle');
 Route::delete('/:version/article/:id', 'api/:version.Article/delete');
 Route::get('/:version/article/months', 'api/:version.Article/getAllMonths');
-Route::get('/:version/article/by_month/:month', 'api/:version.Article/getArticlesByMonth');
+Route::get('/:version/article/by_month', 'api/:version.Article/getArticlesByMonth');
 
 // tag
 Route::get('/:version/tag/q', 'api/:version.Tag/getTagByParam');

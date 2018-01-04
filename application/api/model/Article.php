@@ -75,8 +75,9 @@ class Article extends BaseModel
      */
     public static function getArticlesCountGroupByMonth()
     {
-        return self::field(["FROM_UNIXTIME(update_time, '%Y-%m')" => "month", "COUNT(id)" => "count"])
+        return self::field(["FROM_UNIXTIME(update_time, '%Y%m')" => "month", "COUNT(id)" => "count"])
             ->group('month')
+            ->order(['month' => 'desc'])
             ->select();
     }
 
@@ -89,9 +90,11 @@ class Article extends BaseModel
      */
     public static function getArticlesByMonth($month)
     {
-        return self::where('CONCAT(
-                    YEAR (FROM_UNIXTIME(update_time)),
-                    MONTH (FROM_UNIXTIME(update_time))
-                  ) = :month', ['month' => $month])->select();
+        return self::where("CONCAT(
+                    LEFT(FROM_UNIXTIME(update_time, '%Y%m'), 4),
+                    RIGHT(FROM_UNIXTIME(update_time, '%Y%m'), 2)
+                  ) = :month", ['month' => $month])
+            ->order(['update_time' => 'desc', 'create_time' => 'desc'])
+            ->select();
     }
 }
