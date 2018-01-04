@@ -27,9 +27,11 @@ Route::get('/:version/user_login/paginate', 'api/:version.UserLogin/getLoginLogs
 
 // article
 Route::get('/:version/article', 'api/:version.Article/getAllArticles');
-Route::get('/:version/article/:id', 'api/:version.Article/getArticleByID');
+Route::get('/:version/article/:id', 'api/:version.Article/getArticleByID', [], ['id' => '\d+']);
 Route::post('/:version/article', 'api/:version.Article/createOrUpdateArticle');
 Route::delete('/:version/article/:id', 'api/:version.Article/delete');
+Route::get('/:version/article/months', 'api/:version.Article/getAllMonths');
+Route::get('/:version/article/by_month/:month', 'api/:version.Article/getArticlesByMonth');
 
 // tag
 Route::get('/:version/tag/q', 'api/:version.Tag/getTagByParam');

@@ -66,4 +66,32 @@ class Article extends BaseModel
     {
         return self::with(['tags'])->find($id);
     }
+
+    /**
+     * 根据月份分组，并获取文章数量
+     *
+     * @return false|\PDOStatement|string|\think\Collection
+     * @throws \think\Exception
+     */
+    public static function getArticlesCountGroupByMonth()
+    {
+        return self::field(["FROM_UNIXTIME(update_time, '%Y-%m')" => "month", "COUNT(id)" => "count"])
+            ->group('month')
+            ->select();
+    }
+
+    /**
+     * 根据月份获取文章
+     *
+     * @param $month
+     * @return false|\PDOStatement|string|\think\Collection
+     * @throws \think\exception\DbException
+     */
+    public static function getArticlesByMonth($month)
+    {
+        return self::where('CONCAT(
+                    YEAR (FROM_UNIXTIME(update_time)),
+                    MONTH (FROM_UNIXTIME(update_time))
+                  ) = :month', ['month' => $month])->select();
+    }
 }

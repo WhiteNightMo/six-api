@@ -15,6 +15,7 @@ use app\lib\exception\ParameterException;
 use app\lib\exception\SuccessMessage;
 use app\lib\validate\EditorCreateOrUpdate;
 use app\lib\validate\IDMustBePositiveInt;
+use app\lib\validate\MonthFormat;
 use app\lib\validate\PageParameter;
 use think\Db;
 
@@ -40,6 +41,41 @@ class Article extends BaseController
         $pagingArticles = ArticleModel::getAllArticles($page, $size);
         // pivot
         return $this->getPaginatorData($pagingArticles);
+    }
+
+    /**
+     * 获取所有月份以及文章数量
+     *
+     * @return \think\response\Json
+     * @throws ArticleException
+     * @throws \think\Exception
+     */
+    public function getAllMonths()
+    {
+        // 根据月份分组，并获取文章数量
+        $months = ArticleModel::getArticlesCountGroupByMonth();
+        if ($months->isEmpty()) {
+            throw new ArticleException();
+        }
+        return json($months);
+    }
+
+    /**
+     * 根据月份获取文章
+     *
+     * @param $month
+     * @return \think\response\Json
+     * @throws \think\exception
+     */
+    public function getArticlesByMonth($month)
+    {
+        (new MonthFormat())->goCheck();
+
+        $articles = ArticleModel::getArticlesByMonth($month);
+        if ($articles->isEmpty()) {
+            throw new ArticleException();
+        }
+        return json($articles);
     }
 
     /**
