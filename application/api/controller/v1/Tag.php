@@ -12,6 +12,17 @@ use app\api\model\Tag as TagModel;
 class Tag extends BaseController
 {
     /**
+     * 获取所有标签
+     *
+     * @return false|static[]
+     * @throws \think\Exception
+     */
+    public function getAllTags()
+    {
+        return TagModel::getAllTags();
+    }
+
+    /**
      * 根据参数获取tag
      *
      * @param $q

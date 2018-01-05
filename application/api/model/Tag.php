@@ -23,6 +23,20 @@ class Tag extends BaseModel
     }
 
     /**
+     * 获取所有标签
+     *
+     * @throws \think\Exception
+     */
+    public static function getAllTags()
+    {
+        return self::alias('t')
+            ->join('__ARTICLE_TAG__ a', 't.id = a.tag_id', 'LEFT')
+            ->field(['t.id', 't.name', 'COUNT(t.id)' => 'count'])
+            ->group('t.id')
+            ->select();
+    }
+
+    /**
      * 整理标签
      *
      * @param $tags

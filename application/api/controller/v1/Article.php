@@ -65,7 +65,7 @@ class Article extends BaseController
      *
      * @param $month
      * @return \think\response\Json
-     * @throws \think\exception
+     * @throws \think\Exception
      */
     public function getArticlesByMonth($month)
     {

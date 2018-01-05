@@ -34,6 +34,7 @@ Route::get('/:version/article/months', 'api/:version.Article/getAllMonths');
 Route::get('/:version/article/by_month', 'api/:version.Article/getArticlesByMonth');
 
 // tag
+Route::get('/:version/tag', 'api/:version.Tag/getAllTags');
 Route::get('/:version/tag/q', 'api/:version.Tag/getTagByParam');
 
 // category
