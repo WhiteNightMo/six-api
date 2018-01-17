@@ -6,7 +6,7 @@
  */
 
 // host
-const HOST = 'http://api.biubiubiu.moe';
+const HOST = 'https://api.nixiaomo.com';
 
 return [
     // 项目名称
